@@ -12,8 +12,8 @@ class Tree:
     def __init__(self):
         self.root = None
 
-    # µİ¹é============================================================================
-    def search_re(self, key):    # ²éÕÒ
+    # é€’å½’============================================================================
+    def search_re(self, key):    # æŸ¥æ‰¾
         p = self.root
         return self._search_re(p, key)
 
@@ -28,7 +28,7 @@ class Tree:
             return self._search_re(p.right, key)
 
 
-    def insert_re(self, key):    # ²åÈë
+    def insert_re(self, key):    # æ’å…¥
         self.root =  self._insert_re(self.root, key)
 
     def _insert_re(self, p, key):
@@ -53,13 +53,13 @@ class Tree:
         elif key > node.key:
             node.right = self._delete_re(node.right, key)
         else:
-            # ½ÚµãÓĞÒ»¸ö×Ó½Úµã»òÃ»ÓĞ×Ó½Úµã
+            # èŠ‚ç‚¹æœ‰ä¸€ä¸ªå­èŠ‚ç‚¹æˆ–æ²¡æœ‰å­èŠ‚ç‚¹
             if node.left is None:
                 return node.right
             elif node.right is None:
                 return node.left
 
-            # ½ÚµãÓĞÁ½¸ö×Ó½Úµã£º»ñÈ¡ÓÒ×ÓÊ÷µÄ×îĞ¡½Úµã
+            # èŠ‚ç‚¹æœ‰ä¸¤ä¸ªå­èŠ‚ç‚¹ï¼šè·å–å³å­æ ‘çš„æœ€å°èŠ‚ç‚¹
             min_node = self.find_min(node.right)
             node.key = min_node.key
             node.right = self._delete_re(node.right, min_node.key)
@@ -73,7 +73,7 @@ class Tree:
         return current
 
 
-    def inorder_re(self):    #ÖĞĞò£¨ÉıĞò£©
+    def inorder_re(self):    #ä¸­åºï¼ˆå‡åºï¼‰
         result = []
         self._inorder_re(self.root, result)
         return result
@@ -84,7 +84,7 @@ class Tree:
             result.append(node.key)
             self._inorder_re(node.right, result)
 
-    def preorder_re(self):    #Ç°Ğò
+    def preorder_re(self):    #å‰åº
         result = []
         self._preorder_re(self.root, result)
         return result
@@ -95,7 +95,7 @@ class Tree:
             self._preorder_re(node.left, result)
             self._preorder_re(node.right, result)
 
-    def postorder_re(self):    #ºóĞò
+    def postorder_re(self):    #ååº
         result = []
         self._postorder_re(self.root, result)
         return result
@@ -108,7 +108,7 @@ class Tree:
 
 
 
-    #·Çµİ¹é=========================================================================
+    #éé€’å½’=========================================================================
 
     def search_it(self, key):
         node = self.root
@@ -134,14 +134,14 @@ class Tree:
             elif key > current.key:
                 current = current.right
             else:
-                return  # ¼üÒÑ´æÔÚ£¬²»²åÈë
+                return  # é”®å·²å­˜åœ¨ï¼Œä¸æ’å…¥
 
         if key < parent.key:
             parent.left = new_node
         else:
             parent.right = new_node
 
-    def inorder_it(self):    # ÖĞĞò
+    def inorder_it(self):    # ä¸­åº
         result = []
         stack = []
         current = self.root
@@ -156,7 +156,7 @@ class Tree:
 
         return result
 
-    def preorder_it(self):    # Ç°Ğò
+    def preorder_it(self):    # å‰åº
         if not self.root:
             return []
 
@@ -173,7 +173,7 @@ class Tree:
 
         return result
 
-    def postorder_it(self):    #ºóĞò
+    def postorder_it(self):    #ååº
         if not self.root:
             return []
 
@@ -198,7 +198,7 @@ class Tree:
 
         return result
 
-    def level_order(self):    # ²ãĞò
+    def level_order(self):    # å±‚åº
         if not self.root:
             return []
 
@@ -221,22 +221,22 @@ def main():
     for key in r_list:
         tree.insert_it(key)
 
-    print("µİ¹éÖĞĞò±éÀú:", tree.inorder_re())
-    print("·Çµİ¹éÖĞĞò±éÀú:", tree.inorder_it())
-    print("\nµİ¹éÇ°Ğò±éÀú:", tree.preorder_re())
-    print("·Çµİ¹éÇ°Ğò±éÀú:", tree.preorder_it())
-    print("\nµİ¹éºóĞò±éÀú:", tree.postorder_re())
-    print("·Çµİ¹éºóĞò±éÀú:", tree.postorder_it())
-    print("\n²ãĞò±éÀú:", tree.level_order())
+    print("é€’å½’ä¸­åºéå†:", tree.inorder_re())
+    print("éé€’å½’ä¸­åºéå†:", tree.inorder_it())
+    print("\né€’å½’å‰åºéå†:", tree.preorder_re())
+    print("éé€’å½’å‰åºéå†:", tree.preorder_it())
+    print("\né€’å½’ååºéå†:", tree.postorder_re())
+    print("éé€’å½’ååºéå†:", tree.postorder_it())
+    print("\nå±‚åºéå†:", tree.level_order())
 
     find_key = int(input("search key"))
-    print("·Çµİ¹é")
+    print("éé€’å½’")
     if tree.search_it(find_key):
         print("find")
     else:
         print("not find")
 
-    print("µİ¹é")
+    print("é€’å½’")
     if tree.search_re(find_key):
         print("find")
     else:
@@ -247,7 +247,7 @@ def main():
         tree.delete_re(delete_key)
         print("delete")
 
-    print("²ãĞò±éÀú:",tree.level_order())
+    print("å±‚åºéå†:",tree.level_order())
 
 if __name__ == '__main__':
     main()
